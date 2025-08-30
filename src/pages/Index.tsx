@@ -43,6 +43,7 @@ const Index = () => {
           <RegistrationScreen 
             onRegister={handleRegister}
             onDemoAccess={handleDemoAccess}
+            onBack={() => setCurrentScreen('welcome')}
           />
         );
       

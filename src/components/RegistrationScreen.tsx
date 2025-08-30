@@ -3,13 +3,15 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ArrowLeft } from 'lucide-react';
 
 interface RegistrationScreenProps {
   onRegister: (data: { name: string; birthDate: string; standard: string }) => void;
   onDemoAccess: () => void;
+  onBack?: () => void;
 }
 
-export const RegistrationScreen = ({ onRegister, onDemoAccess }: RegistrationScreenProps) => {
+export const RegistrationScreen = ({ onRegister, onDemoAccess, onBack }: RegistrationScreenProps) => {
   const [formData, setFormData] = useState({
     name: '',
     birthDate: '',
@@ -26,6 +28,20 @@ export const RegistrationScreen = ({ onRegister, onDemoAccess }: RegistrationScr
   return (
     <div className="min-h-screen bg-gradient-secondary flex flex-col items-center justify-center p-6">
       <div className="w-full max-w-md">
+        {/* Back Button */}
+        {onBack && (
+          <div className="flex justify-start mb-4">
+            <Button 
+              onClick={onBack}
+              variant="outline"
+              className="bg-white/20 border-white/30 text-secondary-foreground hover:bg-white/30"
+            >
+              <ArrowLeft className="w-5 h-5 mr-2" />
+              Back
+            </Button>
+          </div>
+        )}
+        
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-secondary-foreground mb-2">

@@ -21,12 +21,21 @@ const Bead = ({ value, isActive, isUpper, onToggle }: BeadProps) => {
         w-8 h-8 rounded-full cursor-pointer transition-all duration-300 shadow-lg
         ${beadColors[value as keyof typeof beadColors]} 
         ${isActive 
-          ? (isUpper ? 'translate-y-8' : '-translate-y-8') + ' shadow-2xl scale-110' 
-          : 'hover:scale-105'
+          ? (isUpper ? 'translate-y-6' : '-translate-y-6') + ' shadow-2xl scale-110' 
+          : isUpper ? 'translate-y-2' : '-translate-y-2'
         }
-        ${isActive ? 'ring-4 ring-yellow-400' : ''}
+        ${isActive ? 'ring-4 ring-yellow-400' : 'hover:scale-105'}
       `}
       title={`${value} का bead`}
+      style={{
+        transform: isActive 
+          ? isUpper 
+            ? 'translateY(24px) scale(1.1)' // Perfect alignment with center line from above
+            : 'translateY(-24px) scale(1.1)' // Perfect alignment with center line from below
+          : isUpper
+            ? 'translateY(8px)' // Rest position away from line (above)
+            : 'translateY(-8px)' // Rest position away from line (below)
+      }}
     />
   );
 };
@@ -85,7 +94,7 @@ const AbacusColumn = ({ columnIndex, value, onChange }: ColumnProps) => {
       </div>
       
       {/* Upper section (5s) */}
-      <div className="h-20 flex flex-col justify-start">
+      <div className="h-20 flex flex-col justify-end items-center pb-2">
         <Bead
           value={5}
           isActive={upperBead}
@@ -95,10 +104,10 @@ const AbacusColumn = ({ columnIndex, value, onChange }: ColumnProps) => {
       </div>
 
       {/* Center line (answer line) */}
-      <div className="w-12 h-1 bg-foreground rounded-full shadow-lg"></div>
+      <div className="w-12 h-1 bg-foreground rounded-full shadow-lg relative z-10"></div>
 
       {/* Lower section (1s) */}
-      <div className="h-32 flex flex-col justify-end space-y-1">
+      <div className="h-32 flex flex-col justify-start items-center pt-2 space-y-1">
         {lowerBeads.map((isActive, index) => (
           <Bead
             key={index}

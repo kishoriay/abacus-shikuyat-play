@@ -1,13 +1,16 @@
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { ArrowLeft } from 'lucide-react';
 import achievements from '@/assets/achievements.jpg';
 
 interface HomeScreenProps {
   onNavigate: (screen: 'learn' | 'practice' | 'games' | 'progress' | 'settings') => void;
   userName?: string;
+  isDemo?: boolean;
+  onBack?: () => void;
 }
 
-export const HomeScreen = ({ onNavigate, userName = 'बच्चे' }: HomeScreenProps) => {
+export const HomeScreen = ({ onNavigate, userName = 'बच्चे', isDemo = false, onBack }: HomeScreenProps) => {
   const menuItems = [
     {
       id: 'learn' as const,
@@ -48,6 +51,20 @@ export const HomeScreen = ({ onNavigate, userName = 'बच्चे' }: HomeScr
 
   return (
     <div className="min-h-screen bg-gradient-fun p-6">
+      {/* Back Button for Demo Users */}
+      {isDemo && onBack && (
+        <div className="flex justify-start mb-4">
+          <Button 
+            onClick={onBack}
+            variant="outline"
+            className="bg-white/20 border-white/30 text-white hover:bg-white/30"
+          >
+            <ArrowLeft className="w-5 h-5 mr-2" />
+            Exit Demo
+          </Button>
+        </div>
+      )}
+      
       {/* Header */}
       <div className="text-center mb-8">
         <div className="flex justify-center items-center mb-4">

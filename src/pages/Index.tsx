@@ -25,6 +25,11 @@ const Index = () => {
     setCurrentScreen('home');
   };
 
+  const handleBackFromDemo = () => {
+    setCurrentScreen('register');
+    setUserName('');
+  };
+
   const handleNavigate = (screen: Screen) => {
     setCurrentScreen(screen);
   };
@@ -52,6 +57,8 @@ const Index = () => {
           <HomeScreen 
             onNavigate={handleNavigate}
             userName={userName}
+            isDemo={userName === 'Demo User'}
+            onBack={userName === 'Demo User' ? handleBackFromDemo : undefined}
           />
         );
       

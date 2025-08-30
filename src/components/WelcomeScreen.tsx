@@ -20,7 +20,7 @@ export const WelcomeScreen = ({ onGetStarted }: WelcomeScreenProps) => {
       {/* App Title */}
       <div className="mb-8">
         <h1 className="text-5xl font-bold text-white mb-2 drop-shadow-lg">
-          Abacus Shikuyat
+          Abacus Learning
         </h1>
         <p className="text-xl text-white/90 font-medium">
           मजेदार गणित सीखें! • Learn Math with Fun!
